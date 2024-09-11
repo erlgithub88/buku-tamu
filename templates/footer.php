@@ -58,7 +58,17 @@
 
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/datatables-demo.js"></script>
-
+    
+    <!-- Tambahkan sintaks js berikut pada footer.php di atas tag </body> agar alert nya menghilang secara otomatis -->
+    <script>
+        $(document).ready(function() {
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 4000);
+        });
+    </script>
 
 </body>
 
