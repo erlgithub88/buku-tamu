@@ -27,10 +27,35 @@ function tambah_tamu($data)
     $bertemu = htmlspecialchars($data['alamat']);
     $kepentingan = htmlspecialchars($data['kepentingan']);
    
-    $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', '$no_hp', '$bertemu', '$kepentingan')";
+    $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', 
+    '$no_hp', '$bertemu', '$kepentingan')";
 
     mysqli_query($koneksi, $query);
 
     return mysqli_affected_rows($koneksi);
 }
+ // function ubah data tamu
+function ubah_tamu($data)
+{
+    global $koneksi;
 
+    $id         = htmlspecialchars($data["id_tamu"]);
+    $nama_tamu  = htmlspecialchars($data["nama_tamu"]);
+    $alamat     = htmlspecialchars($data["alamat"]);
+    $no_hp      = htmlspecialchars($data["no_hp"]);
+    $bertemu    = htmlspecialchars($data["bertemu"]);
+    $kepentingan = htmlspecialchars($data["kepentingan"]);
+
+    $query = "UPDATE buku_tamu SET
+                nama_tamu   = '$nama_tamu',
+                alamat      = '$alamat',
+                no_hp       = '$no_hp',
+                bertemu     = '$bertemu',
+                kepentingan = '$kepentingan'
+                WHERE id_tamu = '$id'";
+
+    mysqli_query($koneksi, $query);
+
+    return mysqli_affected_rows($koneksi);
+}
+?>

@@ -1,3 +1,6 @@
+<?php 
+require 'function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +42,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-school"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Zie BukuTamu </div>
+                <div class="sidebar-brand-text mx-3">ErZie BukuTamu </div>
             </a>
 
             <!-- Divider -->
