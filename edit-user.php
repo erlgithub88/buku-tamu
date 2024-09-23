@@ -1,11 +1,11 @@
 <?php
 include_once('templates/header.php');
 
-// jika ada id_tamu di URL
+// jika ada id_user di URL
 if (isset($_GET['id'])) {
-    $id_tamu = $_GET['id'];
-    //ambil data tamu yang sesuai dengan id_tamu
-    $data = query("SELECT * FROM user WHERE id_tamu = '$id_tamu'")[0];
+    $id_user = $_GET['id'];
+    //ambil data user yang sesuai dengan id_user
+    $data = query("SELECT * FROM user WHERE id_user = '$id_user'")[0];
 }
 ?>
 
@@ -13,11 +13,11 @@ if (isset($_GET['id'])) {
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Ubah Data Tamu</h1>
+<h1 class="h3 mb-4 text-gray-800">Ubah Data User</h1>
 <?php
 // jika ada tombol simpan
 if (isset($_POST['simpan'])) {
-    if (ubah_tamu($_POST) > 0) {
+    if (ubah_user($_POST) > 0) {
 ?>        
         <div class="alert alert-success" role="alert">
                 Data berhasil diubah!
@@ -34,10 +34,10 @@ if (isset($_POST['simpan'])) {
 }
 ?>
 
-<!-- konten edit data tamu -->
+<!-- konten edit data user -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6>Data Tamu</h6>
+        <h6>Data User</h6>
     </div>
     <div class="card-body">
     <form method="post" action="">
@@ -62,7 +62,7 @@ if (isset($_POST['simpan'])) {
 
         <div class="form-group row">
             <div class="col-sm-8 d-flex justify-content-end">
-                <a href="users.php" class="btn btn-danger btn-icon-split">
+                <a href="user.php" class="btn btn-danger btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-chevron-left"></i>
                     </span>
