@@ -1,4 +1,13 @@
 <?php
+//memulai session
+session_start();
+
+//cek bila ada user yang sudah login maka akan redirect ke halaman dashboard
+if(!isset($_SESSION['login'])){
+    header('Location:login.php');
+    exit;
+}
+
 require 'function.php';
 ?>
 <!DOCTYPE html>
@@ -45,9 +54,7 @@ require 'function.php';
                 <div class="sidebar-brand-text mx-3">ErZie BukuTamu </div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
+            
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="index.php">
@@ -55,26 +62,46 @@ require 'function.php';
                     <span>Dashboard</span></a>
             </li>
 
+<?php
+//cek apabila ada user login dan user rolenya adalah operator maka tampilkan buku-tamu
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'operator'):
+?>
             <li class="nav-item">
                 <a class="nav-link" href="buku-tamu.php">
                     <i class="fas fa-fw fa-book-open"></i>
                     <span>Buku Tamu</span></a>
             </li>
-
+<?php endif; ?>
             <li class="nav-item">
                 <a class="nav-link" href="laporan.php">
                     <i class="fas fa-fw fa-file-alt"></i>
                     <span>Laporan</span></a>
             </li>
-
+<?php
+//cek apabila ada user login dan user rolenya adalah admin maka tampilkan user
+if (isset($_SEESION['role']) && $_SESSION['role'] == 'admin') :
+?>
             <li class="nav-item">
                 <a class="nav-link" href="user.php">
                     <i class="fas fa-fw fa-users"></i>
                     <span>User</span></a>
             </li>
+<?php endif; ?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+
+            <?php
+            //cek apabila ada user login maka ditampilkan logout
+            if(isset($_SESSION['login'])) :
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">
+                    <i class="fas fa-fw fa-power-off"></i>
+                    <span>Logout</span></a>
+            </li>
+            <?php endif; ?>
+
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
