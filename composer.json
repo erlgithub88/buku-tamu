@@ -1,0 +1,17 @@
+{
+    "name": "erlangga/buku-tamu",
+    "autoload": {
+        "psr-4": {
+            "Erlangga\\BukuTamu\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "erlgithub88",
+            "email": "ea490569@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^3.3"
+    }
+}
