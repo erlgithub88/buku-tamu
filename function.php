@@ -26,9 +26,15 @@ function tambah_tamu($data)
     $no_hp = htmlspecialchars($data['no_hp']);
     $bertemu = htmlspecialchars($data['alamat']);
     $kepentingan = htmlspecialchars($data['kepentingan']);
+
+    //upload gambar
+    $gambar = uploadGambar();
+    if (!$gambar) {
+        return false;
+    }
    
     $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', 
-    '$no_hp', '$bertemu', '$kepentingan')";
+    '$no_hp', '$bertemu', '$kepentingan','$gambar')";
 
     mysqli_query($koneksi, $query);
 
@@ -133,4 +139,57 @@ function ganti_password($data) {
     
     return mysqli_affected_rows($koneksi);
 
+}
+function uploadGambar()
+{
+    //ambil data file gambar dari variable $_FILES
+    $namaFile = $_FILES['gambar'] ['name'];
+    $ukuranFile = $_FILES['gambar'] ['size'];
+    $error = $_FILES['gambar'] ['eror'];
+    $tmpName = $_FILES['gambar'] ['tmp_name'];
+
+    //cek apakah tidak ada gambar yang diunggah
+    if ($error === 4) {
+        echo "<script>
+                alert('pilih gambar terlebih dahulu!);
+                </script>";
+        return false;
+    }
+
+    //cek apakah yang diunggah adalah gambar
+    if ($error === 4) {
+    echo "<script>
+            alert('Pilih gambar terlebih dahulu!');
+          </script>";
+    return false;
+    }
+    
+    // cek apakah yang diunggah adalah gambar
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        echo "<script>
+                alert('File yang diunggah harus gambar!');
+            </script>";
+        return false;
+    }
+
+    // cek jika ukurannya terlalu besar
+    if ($ukuranFile > 1000000) {
+        echo "<script>
+                alert('Ukuran gambar terlalu besar!');
+            </script>";
+        return false;
+    }
+
+    // jika lolos pengecekan, gambar akan diunggah
+    // generate nama gambar baru dengan uniqid()
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, 'assets/upload_gambar/' . $namaFileBaru);
+
+    return $namaFileBaru;
 }

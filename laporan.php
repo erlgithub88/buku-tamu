@@ -108,7 +108,6 @@ if (isset($_POST['tampilkan'])) {
               </td>
             </tr>
           <?php endforeach;
-          
           ?>
         </tbody>
       </table>

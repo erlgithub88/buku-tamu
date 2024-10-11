@@ -26,16 +26,7 @@ include_once('templates/header.php');
   }
   ?>
 
-  <!-- Tambahkan sintaks js berikut pada footer.php di atas tag </body> agar alert nya menghilang secara otomatis -->
-  <script>
-    $(document).ready(function() {
-      window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-          $(this).remove();
-        });
-      }, 4000);
-    });
-  </script>
+
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -97,7 +88,7 @@ $data = mysqli_fetch_array($query);
 $kodeTamu = $data['kodeTerbesar'];
 
 // mengambil angka dari kode barang terbesar, menggunakan fungsi substr dan diubah ke integer dengan (int)
-$urutan = (int) substr($kodeTamu, 3, 3);
+$urutan = (int) substr($kodeTamu, 3, 2);
 
 // nomor yang diambil akan ditambah 1 untuk menentukan nomor urut berikutnya
 $urutan++;
@@ -106,7 +97,7 @@ $urutan++;
 $huruf = "TMS"; // TMS=Suritenj; berfungsi untuk membuat string menjadi 3 karakter
 
 // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya tT
-$kodeTamu = $huruf . sprintf("%03s", $urutan);
+$kodeTamu = $huruf . sprintf("%02s", $urutan);
 ?>
 
 <!-- Modal -->
@@ -120,7 +111,7 @@ $kodeTamu = $huruf . sprintf("%03s", $urutan);
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
           <input type="hidden" name="id_tamu" id="id_tamu" value="<?= $kodeTamu ?>">
           <div class="form-group row">
             <label for="nama_tamu" class="col-sm-3 col-form-label">Nama Tamu</label>
@@ -151,6 +142,13 @@ $kodeTamu = $huruf . sprintf("%03s", $urutan);
             <div class="col-sm-8">
               <input type="text" class="form-control" id="kepentingan" name="kepentingan">
             </div>
+          </div>
+          <div class="from-group row">
+            <label for="gambar" class="col-sm-3 col-form-label">Unggah Foto</label>
+            <div class="custom-file col-sm-8">
+              <input type="file" class="custom-file-input" id="gambar" name="gambar">
+              <label class="custom-file-label" for="gambar">Choose file</label>
+            </div>          
           </div>
       </div>
       <div class="modal-footer">
